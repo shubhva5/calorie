@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Calorie Calculator</title>
+<title>Blog - Calorie Calculator</title>
 <style>
   :root {
     --bg-1: #0f172a;
@@ -116,125 +116,87 @@
     font-size: 1rem;
   }
 
-  .card {
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+  }
+
+  .blog-card {
     background: var(--card-bg);
     border: 1px solid var(--card-border);
     border-radius: var(--radius);
-    padding: 32px;
+    padding: 26px;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
 
-  .card h2 {
-    margin: 0 0 14px;
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: var(--text-main);
+  .blog-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
   }
 
-  .card p {
-    color: var(--text-muted);
-    line-height: 1.7;
-    margin: 0 0 12px;
-    font-size: 0.98rem;
-  }
-
-  .card p:last-child {
-    margin-bottom: 0;
-  }
-
-  .hero {
-    text-align: center;
-    padding: 12px 8px 8px;
-  }
-
-  .hero-cta {
+  .post-tag {
     display: inline-block;
-    margin-top: 12px;
-    padding: 15px 36px;
-    border: none;
-    border-radius: 14px;
-    background: linear-gradient(135deg, var(--accent), var(--accent-3));
-    color: #fff;
-    font-size: 1.05rem;
+    align-self: flex-start;
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-size: 0.75rem;
     font-weight: 700;
-    text-decoration: none;
-    letter-spacing: 0.02em;
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
-    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.35);
-  }
-
-  .hero-cta:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 14px 36px rgba(99, 102, 241, 0.45);
-  }
-
-  .feature-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 18px;
-  }
-
-  .feature-card {
-    border-radius: 16px;
-    padding: 22px;
-    background: var(--input-bg);
-    border: 1px solid var(--input-border);
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .feature-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 4px;
-  }
-
-  .feature-card.lose::before { background: var(--lose-color); }
-  .feature-card.maintain::before { background: var(--maintain-color); }
-  .feature-card.gain::before { background: var(--gain-color); }
-
-  .feature-card .label {
-    font-size: 0.85rem;
+    letter-spacing: 0.03em;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--text-muted);
+    border: 1px solid var(--input-border);
+    color: var(--accent-2);
+    margin-bottom: 14px;
+  }
+
+  .post-title {
+    font-size: 1.2rem;
     font-weight: 700;
-    margin-bottom: 10px;
-  }
-
-  .feature-card .sub {
-    margin-top: 4px;
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    line-height: 1.5;
-  }
-
-  .steps {
-    color: var(--text-muted);
-    line-height: 1.8;
-    margin: 0;
-    padding-left: 20px;
-    font-size: 0.98rem;
-  }
-
-  .steps li strong {
+    margin: 0 0 10px;
     color: var(--text-main);
+  }
+
+  .post-excerpt {
+    color: var(--text-muted);
+    line-height: 1.6;
+    font-size: 0.95rem;
+    margin: 0 0 18px;
+    flex-grow: 1;
+  }
+
+  .post-meta {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    margin-bottom: 14px;
+  }
+
+  .read-more {
+    color: var(--accent-2);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.9rem;
+    align-self: flex-start;
+    transition: color 0.2s ease;
+  }
+
+  .read-more:hover {
+    color: var(--accent-3);
   }
 
   footer {
     text-align: center;
-    margin-top: 8px;
+    margin-top: 32px;
     color: var(--text-muted);
     font-size: 0.8rem;
   }
 
   @media (max-width: 480px) {
-    .card { padding: 22px; }
+    .blog-card { padding: 20px; }
     .navbar { padding: 14px 18px; }
   }
 
@@ -282,14 +244,6 @@
     33% { transform: translate(30px, -40px) scale(1.1); }
     66% { transform: translate(-25px, 25px) scale(0.95); }
   }
-
-  .feature-card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .feature-card:hover {
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
-  }
 </style>
 </head>
 <body>
@@ -299,53 +253,46 @@
 <nav class="navbar">
   <a href="index.html" class="nav-brand">Calorie Calculator</a>
   <div class="nav-links">
-    <a href="index.html" class="active">Home</a>
+    <a href="index.html">Home</a>
     <a href="calculator.html">Calculator</a>
-    <a href="blog.html">Blog</a>
+    <a href="blog.html" class="active">Blog</a>
     <a href="about.html">About</a>
   </div>
 </nav>
 <main>
 <div class="wrapper">
   <header>
-    <h1>Know Your Numbers</h1>
-    <p>A free, no-signup calorie calculator to help you lose, maintain, or gain weight — the smart way.</p>
+    <h1>The Blog</h1>
+    <p>Practical, no-nonsense guides on calories, metabolism, and weight management.</p>
   </header>
 
-  <div class="card hero">
-    <h2>Find your daily calorie target in seconds</h2>
-    <p>Enter your age, gender, height, weight, and activity level to get your BMR, TDEE, and personalized calorie targets.</p>
-    <a href="calculator.html" class="hero-cta">Open Calculator →</a>
-  </div>
+  <div class="blog-grid">
+    <div class="blog-card">
+      <span class="post-tag">Basics</span>
+      <div class="post-meta">6 min read</div>
+      <h2 class="post-title">BMR vs. TDEE: What's the Difference?</h2>
+      <p class="post-excerpt">Two acronyms drive every calorie number this calculator gives you. Here's what they actually mean, how they're calculated, and why mixing them up leads to bad diet advice.</p>
+      <a href="blog-bmr-vs-tdee.html" class="read-more">Read more →</a>
+    </div>
 
-  <div class="card">
-    <h2>Pick your goal</h2>
-    <div class="feature-grid">
-      <div class="feature-card lose">
-        <div class="label">Lose Weight</div>
-        <div class="sub">A daily calorie deficit for steady, sustainable fat loss.</div>
-      </div>
-      <div class="feature-card maintain">
-        <div class="label">Maintain Weight</div>
-        <div class="sub">Match your intake to your energy needs to stay stable.</div>
-      </div>
-      <div class="feature-card gain">
-        <div class="label">Gain Weight</div>
-        <div class="sub">A calorie surplus to support healthy weight gain.</div>
-      </div>
+    <div class="blog-card">
+      <span class="post-tag">Weight Loss</span>
+      <div class="post-meta">7 min read</div>
+      <h2 class="post-title">5 Sustainable Ways to Hit a Calorie Deficit</h2>
+      <p class="post-excerpt">Crash diets fail because they fight your biology. These five practical habits create a lasting deficit without leaving you hungry, exhausted, or ready to quit by Friday.</p>
+      <a href="blog-weight-loss-tips.html" class="read-more">Read more →</a>
+    </div>
+
+    <div class="blog-card">
+      <span class="post-tag">Activity</span>
+      <div class="post-meta">5 min read</div>
+      <h2 class="post-title">How Activity Level Changes Your Calorie Needs</h2>
+      <p class="post-excerpt">Picking the wrong activity level is the most common reason people's calorie targets feel off. Here's how to honestly assess yours and adjust it as your routine changes.</p>
+      <a href="blog-activity-level.html" class="read-more">Read more →</a>
     </div>
   </div>
 
-  <div class="card">
-    <h2>How it works</h2>
-    <ol class="steps">
-      <li><strong>Enter your details</strong> — age, gender, height, weight, and activity level.</li>
-      <li><strong>We calculate your BMR</strong> using the Mifflin-St Jeor equation.</li>
-      <li><strong>Get your TDEE</strong> and three calorie targets for losing, maintaining, or gaining weight.</li>
-    </ol>
-  </div>
-
-  <footer>Based on the Mifflin-St Jeor equation. Estimates only — consult a professional for personalized advice.</footer>
+  <footer>New posts added regularly. Estimates in every article are general guidance, not medical advice.</footer>
 </div>
 </main>
 </body>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About - Calorie Calculator</title>
+<title>BMR vs. TDEE - Calorie Calculator Blog</title>
 <style>
   :root {
     --bg-1: #0f172a;
@@ -91,17 +91,41 @@
 
   .wrapper {
     width: 100%;
-    max-width: 920px;
+    max-width: 760px;
+  }
+
+  .back-link {
+    display: inline-block;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 24px;
+    transition: color 0.2s ease;
+  }
+
+  .back-link:hover { color: var(--text-main); }
+
+  .post-tag {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    border: 1px solid var(--input-border);
+    color: var(--accent-2);
+    margin-bottom: 16px;
   }
 
   header {
-    text-align: center;
     margin-bottom: 36px;
   }
 
   header h1 {
-    font-size: clamp(1.8rem, 4vw, 2.6rem);
-    margin: 0 0 8px;
+    font-size: clamp(1.7rem, 4vw, 2.4rem);
+    margin: 0 0 12px;
     background: linear-gradient(90deg, var(--accent-2), var(--accent), var(--accent-3));
     -webkit-background-clip: text;
     background-clip: text;
@@ -110,10 +134,10 @@
     letter-spacing: -0.5px;
   }
 
-  header p {
+  .post-meta {
     color: var(--text-muted);
     margin: 0;
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
 
   .card {
@@ -129,21 +153,19 @@
 
   .card h2 {
     margin: 0 0 14px;
-    font-size: 1.3rem;
+    font-size: 1.25rem;
     font-weight: 700;
     color: var(--text-main);
   }
 
   .card p {
     color: var(--text-muted);
-    line-height: 1.7;
-    margin: 0 0 12px;
+    line-height: 1.75;
+    margin: 0 0 14px;
     font-size: 0.98rem;
   }
 
-  .card p:last-child {
-    margin-bottom: 0;
-  }
+  .card p:last-child { margin-bottom: 0; }
 
   .card ul {
     color: var(--text-muted);
@@ -153,9 +175,7 @@
     font-size: 0.98rem;
   }
 
-  .card ul li strong {
-    color: var(--text-main);
-  }
+  .card ul li strong { color: var(--text-main); }
 
   .formula-box {
     background: var(--input-bg);
@@ -169,24 +189,24 @@
     overflow-x: auto;
   }
 
-  .badge-row {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-top: 16px;
+  .cta-box {
+    text-align: center;
   }
 
-  .badge {
-    padding: 6px 14px;
-    border-radius: 999px;
-    font-size: 0.8rem;
+  .cta-btn {
+    display: inline-block;
+    margin-top: 4px;
+    padding: 14px 32px;
+    border: none;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-3));
+    color: #fff;
+    font-size: 1rem;
     font-weight: 700;
-    border: 1px solid var(--input-border);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.35);
   }
-
-  .badge.lose { color: var(--lose-color); border-color: var(--lose-color); }
-  .badge.maintain { color: var(--maintain-color); border-color: var(--maintain-color); }
-  .badge.gain { color: var(--gain-color); border-color: var(--gain-color); }
 
   footer {
     text-align: center;
@@ -207,70 +227,77 @@
   <div class="nav-links">
     <a href="index.html">Home</a>
     <a href="calculator.html">Calculator</a>
-    <a href="blog.html">Blog</a>
-    <a href="about.html" class="active">About</a>
+    <a href="blog.html" class="active">Blog</a>
+    <a href="about.html">About</a>
   </div>
 </nav>
 <main>
 <div class="wrapper">
+  <a href="blog.html" class="back-link">← Back to Blog</a>
   <header>
-    <h1>About This Tool</h1>
-    <p>How the calculator works and why it's built this way.</p>
+    <span class="post-tag">Basics</span>
+    <h1>BMR vs. TDEE: What's the Difference?</h1>
+    <p class="post-meta">6 min read</p>
   </header>
 
   <div class="card">
-    <h2>What it does</h2>
+    <h2>Two numbers, one confusion</h2>
     <p>
-      This calculator estimates how many calories you need each day based on your age, gender,
-      height, weight, and activity level. It gives you three targets so you can pick the one
-      that matches your goal:
+      Every result on this calculator boils down to two numbers: BMR and TDEE. They sound similar,
+      they're calculated from the same inputs, and they get used interchangeably online — which is
+      exactly why so many people end up eating the wrong number of calories.
     </p>
-    <div class="badge-row">
-      <span class="badge lose">Lose Weight</span>
-      <span class="badge maintain">Maintain Weight</span>
-      <span class="badge gain">Gain Weight</span>
-    </div>
+    <p>
+      Get the distinction straight once, and every calorie target you see anywhere will make sense.
+    </p>
   </div>
 
   <div class="card">
-    <h2>The formula</h2>
+    <h2>BMR: calories at total rest</h2>
     <p>
-      Your daily needs are calculated in two steps. First, we estimate your
-      <strong style="color:var(--text-main)">Basal Metabolic Rate (BMR)</strong> — the calories
-      your body burns at rest — using the Mifflin-St Jeor equation, widely regarded as one of the
-      most accurate BMR formulas available:
+      Your <strong style="color:var(--text-main)">Basal Metabolic Rate (BMR)</strong> is the energy
+      your body burns just to stay alive — breathing, circulating blood, keeping your organs and
+      brain running — if you did nothing but lie in bed for 24 hours. No walking, no digesting food,
+      no getting up to make coffee.
     </p>
+    <p>We estimate it with the Mifflin-St Jeor equation:</p>
     <div class="formula-box">
       Men:   BMR = 10 × weight(kg) + 6.25 × height(cm) − 5 × age + 5<br>
       Women: BMR = 10 × weight(kg) + 6.25 × height(cm) − 5 × age − 161
     </div>
     <p>
-      Next, we multiply your BMR by an activity factor to get your
-      <strong style="color:var(--text-main)">Total Daily Energy Expenditure (TDEE)</strong> —
-      the calories you burn in a typical day, including exercise and daily movement.
+      BMR is never a number you should eat at for long — it doesn't account for any movement at all,
+      including the incidental movement of a normal day.
     </p>
   </div>
 
   <div class="card">
-    <h2>How the three targets are set</h2>
-    <ul>
-      <li><strong>Maintain Weight</strong> — your TDEE as-is, to keep your current weight stable.</li>
-      <li><strong>Lose Weight</strong> — TDEE minus 500 calories, roughly a 0.5 kg (1 lb) per week loss.</li>
-      <li><strong>Gain Weight</strong> — TDEE plus 500 calories, roughly a 0.5 kg (1 lb) per week gain.</li>
-    </ul>
-  </div>
-
-  <div class="card">
-    <h2>A few notes</h2>
+    <h2>TDEE: calories in a real day</h2>
     <p>
-      These numbers are estimates based on population averages, not a medical prescription.
-      Individual metabolism can vary due to genetics, muscle mass, medical conditions, and other
-      factors. If you have specific health goals or conditions, please consult a doctor or
-      registered dietitian before making major changes to your diet.
+      <strong style="color:var(--text-main)">Total Daily Energy Expenditure (TDEE)</strong> takes
+      your BMR and multiplies it by an activity factor — a rough estimate of how much extra energy
+      your actual lifestyle burns on top of resting metabolism.
+    </p>
+    <ul>
+      <li><strong>Sedentary</strong> — desk job, little to no exercise.</li>
+      <li><strong>Lightly active</strong> — light exercise 1-3 days a week.</li>
+      <li><strong>Moderately active</strong> — moderate exercise 3-5 days a week.</li>
+      <li><strong>Very active</strong> — hard exercise 6-7 days a week.</li>
+      <li><strong>Extra active</strong> — hard daily exercise plus a physically demanding job.</li>
+    </ul>
+    <p>
+      TDEE is the number that actually reflects your day-to-day life, which is why it's the baseline
+      every calorie target — lose, maintain, or gain — is built from.
     </p>
   </div>
 
-  <footer>Built with plain HTML, CSS, and JavaScript — no tracking, no accounts, just numbers.</footer>
+  <div class="card cta-box">
+    <h2>Get your own numbers</h2>
+    <p>Plug in your details and see your BMR and TDEE side by side.</p>
+    <a href="calculator.html" class="cta-btn">Open the Calculator →</a>
+  </div>
+
+  <footer>Estimates only — individual metabolism varies. Consult a professional for personalized advice.</footer>
 </div>
 </main>
 </body>
