@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About - Calorie Calculator</title>
+<style>
+  :root {
+    --bg-1: #0f172a;
+    --bg-2: #1e1b4b;
+    --card-bg: rgba(255, 255, 255, 0.06);
+    --card-border: rgba(255, 255, 255, 0.12);
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --accent: #6366f1;
+    --accent-2: #22d3ee;
+    --accent-3: #f472b6;
+    --lose-color: #f87171;
+    --maintain-color: #38bdf8;
+    --gain-color: #4ade80;
+    --input-bg: rgba(255, 255, 255, 0.05);
+    --input-border: rgba(255, 255, 255, 0.15);
+    --radius: 18px;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: radial-gradient(circle at 20% 20%, var(--bg-2), var(--bg-1) 60%);
+    color: var(--text-main);
+  }
+
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 32px;
+    background: rgba(15, 23, 42, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--card-border);
+  }
+
+  .nav-brand {
+    font-weight: 800;
+    font-size: 1.1rem;
+    background: linear-gradient(90deg, var(--accent-2), var(--accent), var(--accent-3));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-decoration: none;
+    letter-spacing: -0.3px;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 8px;
+  }
+
+  .nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 10px;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+
+  .nav-links a:hover {
+    color: var(--text-main);
+    background: var(--input-bg);
+  }
+
+  .nav-links a.active {
+    color: #fff;
+    background: linear-gradient(135deg, var(--accent), var(--accent-3));
+  }
+
+  main {
+    display: flex;
+    justify-content: center;
+    padding: 48px 20px;
+  }
+
+  .wrapper {
+    width: 100%;
+    max-width: 920px;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 36px;
+  }
+
+  header h1 {
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    margin: 0 0 8px;
+    background: linear-gradient(90deg, var(--accent-2), var(--accent), var(--accent-3));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+  }
+
+  header p {
+    color: var(--text-muted);
+    margin: 0;
+    font-size: 1rem;
+  }
+
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius);
+    padding: 32px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    margin-bottom: 24px;
+  }
+
+  .card h2 {
+    margin: 0 0 14px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-main);
+  }
+
+  .card p {
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin: 0 0 12px;
+    font-size: 0.98rem;
+  }
+
+  .card p:last-child {
+    margin-bottom: 0;
+  }
+
+  .card ul {
+    color: var(--text-muted);
+    line-height: 1.8;
+    margin: 0;
+    padding-left: 20px;
+    font-size: 0.98rem;
+  }
+
+  .card ul li strong {
+    color: var(--text-main);
+  }
+
+  .formula-box {
+    background: var(--input-bg);
+    border: 1px solid var(--input-border);
+    border-radius: 12px;
+    padding: 16px 18px;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 0.9rem;
+    color: var(--accent-2);
+    margin: 14px 0;
+    overflow-x: auto;
+  }
+
+  .badge-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+  }
+
+  .badge {
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    border: 1px solid var(--input-border);
+  }
+
+  .badge.lose { color: var(--lose-color); border-color: var(--lose-color); }
+  .badge.maintain { color: var(--maintain-color); border-color: var(--maintain-color); }
+  .badge.gain { color: var(--gain-color); border-color: var(--gain-color); }
+
+  footer {
+    text-align: center;
+    margin-top: 8px;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+  }
+
+  @media (max-width: 480px) {
+    .card { padding: 22px; }
+    .navbar { padding: 14px 18px; }
+  }
+</style>
+</head>
+<body>
+<nav class="navbar">
+  <a href="index.html" class="nav-brand">Calorie Calculator</a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="about.html" class="active">About</a>
+  </div>
+</nav>
+<main>
+<div class="wrapper">
+  <header>
+    <h1>About This Tool</h1>
+    <p>How the calculator works and why it's built this way.</p>
+  </header>
+
+  <div class="card">
+    <h2>What it does</h2>
+    <p>
+      This calculator estimates how many calories you need each day based on your age, gender,
+      height, weight, and activity level. It gives you three targets so you can pick the one
+      that matches your goal:
+    </p>
+    <div class="badge-row">
+      <span class="badge lose">Lose Weight</span>
+      <span class="badge maintain">Maintain Weight</span>
+      <span class="badge gain">Gain Weight</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>The formula</h2>
+    <p>
+      Your daily needs are calculated in two steps. First, we estimate your
+      <strong style="color:var(--text-main)">Basal Metabolic Rate (BMR)</strong> — the calories
+      your body burns at rest — using the Mifflin-St Jeor equation, widely regarded as one of the
+      most accurate BMR formulas available:
+    </p>
+    <div class="formula-box">
+      Men:   BMR = 10 × weight(kg) + 6.25 × height(cm) − 5 × age + 5<br>
+      Women: BMR = 10 × weight(kg) + 6.25 × height(cm) − 5 × age − 161
+    </div>
+    <p>
+      Next, we multiply your BMR by an activity factor to get your
+      <strong style="color:var(--text-main)">Total Daily Energy Expenditure (TDEE)</strong> —
+      the calories you burn in a typical day, including exercise and daily movement.
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>How the three targets are set</h2>
+    <ul>
+      <li><strong>Maintain Weight</strong> — your TDEE as-is, to keep your current weight stable.</li>
+      <li><strong>Lose Weight</strong> — TDEE minus 500 calories, roughly a 0.5 kg (1 lb) per week loss.</li>
+      <li><strong>Gain Weight</strong> — TDEE plus 500 calories, roughly a 0.5 kg (1 lb) per week gain.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>A few notes</h2>
+    <p>
+      These numbers are estimates based on population averages, not a medical prescription.
+      Individual metabolism can vary due to genetics, muscle mass, medical conditions, and other
+      factors. If you have specific health goals or conditions, please consult a doctor or
+      registered dietitian before making major changes to your diet.
+    </p>
+  </div>
+
+  <footer>Built with plain HTML, CSS, and JavaScript — no tracking, no accounts, just numbers.</footer>
+</div>
+</main>
+</body>
+</html>

@@ -31,6 +31,59 @@
     font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
     background: radial-gradient(circle at 20% 20%, var(--bg-2), var(--bg-1) 60%);
     color: var(--text-main);
+  }
+
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 32px;
+    background: rgba(15, 23, 42, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--card-border);
+  }
+
+  .nav-brand {
+    font-weight: 800;
+    font-size: 1.1rem;
+    background: linear-gradient(90deg, var(--accent-2), var(--accent), var(--accent-3));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-decoration: none;
+    letter-spacing: -0.3px;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 8px;
+  }
+
+  .nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 10px;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+
+  .nav-links a:hover {
+    color: var(--text-main);
+    background: var(--input-bg);
+  }
+
+  .nav-links a.active {
+    color: #fff;
+    background: linear-gradient(135deg, var(--accent), var(--accent-3));
+  }
+
+  main {
     display: flex;
     justify-content: center;
     padding: 48px 20px;
@@ -265,6 +318,14 @@
 </style>
 </head>
 <body>
+<nav class="navbar">
+  <a href="index.html" class="nav-brand">Calorie Calculator</a>
+  <div class="nav-links">
+    <a href="index.html" class="active">Home</a>
+    <a href="about.html">About</a>
+  </div>
+</nav>
+<main>
 <div class="wrapper">
   <header>
     <h1>Calorie Calculator</h1>
@@ -342,6 +403,7 @@
 
   <footer>Based on the Mifflin-St Jeor equation. Estimates only — consult a professional for personalized advice.</footer>
 </div>
+</main>
 
 <script>
   let selectedGender = 'male';
